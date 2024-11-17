@@ -1,0 +1,229 @@
+<!DOCTYPE html><html lang="zh-CN" data-theme="light"><head><meta charset="UTF-8"><meta http-equiv="X-UA-Compatible" content="IE=edge"><meta name="viewport" content="width=device-width, initial-scale=1.0,viewport-fit=cover"><title>C++中const的各种用法 | 长夜漫漫</title><meta name="author" content="长夜"><meta name="copyright" content="长夜"><meta name="format-detection" content="telephone=no"><meta name="theme-color" content="#ffffff"><meta name="description" content="在 C++ 中，const 关键字用于声明常量，指示某个变量的值不能被改变。它是 C++ 中的重要语法工具，广泛应用于不同的编程场景中，能够提高代码的可维护性、可读性和安全性。以下是 const 的全部使用场景及详解： 1. 常量变量（Constant Variables）最常见的 const 用法是声明常量变量，它确保变量在初始化之后不能修改其值。 1const int MAX_SIZE &#x3D; 1">
+<meta property="og:type" content="article">
+<meta property="og:title" content="C++中const的各种用法">
+<meta property="og:url" content="http://qbndp.github.io/2024/11/17/C++%E4%B8%ADconst%E7%9A%84%E5%90%84%E7%A7%8D%E7%94%A8%E6%B3%95/index.html">
+<meta property="og:site_name" content="长夜漫漫">
+<meta property="og:description" content="在 C++ 中，const 关键字用于声明常量，指示某个变量的值不能被改变。它是 C++ 中的重要语法工具，广泛应用于不同的编程场景中，能够提高代码的可维护性、可读性和安全性。以下是 const 的全部使用场景及详解： 1. 常量变量（Constant Variables）最常见的 const 用法是声明常量变量，它确保变量在初始化之后不能修改其值。 1const int MAX_SIZE &#x3D; 1">
+<meta property="og:locale" content="zh_CN">
+<meta property="og:image" content="http://qbndp.github.io/img/butterfly-icon.png">
+<meta property="article:published_time" content="2024-11-17T15:39:50.000Z">
+<meta property="article:modified_time" content="2024-11-17T15:41:04.943Z">
+<meta property="article:author" content="长夜">
+<meta property="article:tag" content="C++">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:image" content="http://qbndp.github.io/img/butterfly-icon.png"><link rel="shortcut icon" href="/img/favicon.png"><link rel="canonical" href="http://qbndp.github.io/2024/11/17/C++%E4%B8%ADconst%E7%9A%84%E5%90%84%E7%A7%8D%E7%94%A8%E6%B3%95/index.html"><link rel="preconnect" href="//cdn.jsdelivr.net"/><link rel="preconnect" href="//busuanzi.ibruce.info"/><link rel="stylesheet" href="/css/index.css"><link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@fortawesome/fontawesome-free/css/all.min.css"><script>
+    (() => {
+      
+    const saveToLocal = {
+      set: (key, value, ttl) => {
+        if (!ttl) return
+        const expiry = Date.now() + ttl * 86400000
+        localStorage.setItem(key, JSON.stringify({ value, expiry }))
+      },
+      get: key => {
+        const itemStr = localStorage.getItem(key)
+        if (!itemStr) return undefined
+        const { value, expiry } = JSON.parse(itemStr)
+        if (Date.now() > expiry) {
+          localStorage.removeItem(key)
+          return undefined
+        }
+        return value
+      }
+    }
+
+    window.btf = {
+      saveToLocal,
+      getScript: (url, attr = {}) => new Promise((resolve, reject) => {
+        const script = document.createElement('script')
+        script.src = url
+        script.async = true
+        Object.entries(attr).forEach(([key, val]) => script.setAttribute(key, val))
+        script.onload = script.onreadystatechange = () => {
+          if (!script.readyState || /loaded|complete/.test(script.readyState)) resolve()
+        }
+        script.onerror = reject
+        document.head.appendChild(script)
+      }),
+      getCSS: (url, id) => new Promise((resolve, reject) => {
+        const link = document.createElement('link')
+        link.rel = 'stylesheet'
+        link.href = url
+        if (id) link.id = id
+        link.onload = link.onreadystatechange = () => {
+          if (!link.readyState || /loaded|complete/.test(link.readyState)) resolve()
+        }
+        link.onerror = reject
+        document.head.appendChild(link)
+      }),
+      addGlobalFn: (key, fn, name = false, parent = window) => {
+        if (!false && key.startsWith('pjax')) return
+        const globalFn = parent.globalFn || {}
+        globalFn[key] = globalFn[key] || {}
+        globalFn[key][name || Object.keys(globalFn[key]).length] = fn
+        parent.globalFn = globalFn
+      }
+    }
+  
+      
+      const activateDarkMode = () => {
+        document.documentElement.setAttribute('data-theme', 'dark')
+        if (document.querySelector('meta[name="theme-color"]') !== null) {
+          document.querySelector('meta[name="theme-color"]').setAttribute('content', '#0d0d0d')
+        }
+      }
+      const activateLightMode = () => {
+        document.documentElement.setAttribute('data-theme', 'light')
+        if (document.querySelector('meta[name="theme-color"]') !== null) {
+          document.querySelector('meta[name="theme-color"]').setAttribute('content', '#ffffff')
+        }
+      }
+
+      btf.activateDarkMode = activateDarkMode
+      btf.activateLightMode = activateLightMode
+
+      const theme = saveToLocal.get('theme')
+    
+          theme === 'dark' ? activateDarkMode() : theme === 'light' ? activateLightMode() : null
+        
+      
+      const asideStatus = saveToLocal.get('aside-status')
+      if (asideStatus !== undefined) {
+        document.documentElement.classList.toggle('hide-aside', asideStatus === 'hide')
+      }
+    
+      
+    const detectApple = () => {
+      if (/iPad|iPhone|iPod|Macintosh/.test(navigator.userAgent)) {
+        document.documentElement.classList.add('apple')
+      }
+    }
+    detectApple()
+  
+    })()
+  </script><script>const GLOBAL_CONFIG = {
+  root: '/',
+  algolia: undefined,
+  localSearch: undefined,
+  translate: undefined,
+  highlight: {"plugin":"highlight.js","highlightCopy":true,"highlightLang":true,"highlightHeightLimit":false,"highlightFullpage":false,"highlightMacStyle":false},
+  copy: {
+    success: '复制成功',
+    error: '复制失败',
+    noSupport: '浏览器不支持'
+  },
+  relativeDate: {
+    homepage: false,
+    post: false
+  },
+  runtime: '',
+  dateSuffix: {
+    just: '刚刚',
+    min: '分钟前',
+    hour: '小时前',
+    day: '天前',
+    month: '个月前'
+  },
+  copyright: undefined,
+  lightbox: 'null',
+  Snackbar: undefined,
+  infinitegrid: {
+    js: 'https://cdn.jsdelivr.net/npm/@egjs/infinitegrid/dist/infinitegrid.min.js',
+    buttonText: '加载更多'
+  },
+  isPhotoFigcaption: false,
+  islazyload: false,
+  isAnchor: false,
+  percent: {
+    toc: true,
+    rightside: false,
+  },
+  autoDarkmode: false
+}</script><script id="config-diff">var GLOBAL_CONFIG_SITE = {
+  title: 'C++中const的各种用法',
+  isPost: true,
+  isHome: false,
+  isHighlightShrink: false,
+  isToc: true,
+  isShuoshuo: false
+}</script><meta name="generator" content="Hexo 7.3.0"></head><body><div id="sidebar"><div id="menu-mask"></div><div id="sidebar-menus"><div class="avatar-img text-center"><img src="/img/butterfly-icon.png" onerror="onerror=null;src='/img/friend_404.gif'" alt="avatar"/></div><div class="site-data text-center"><a href="/archives/"><div class="headline">文章</div><div class="length-num">2</div></a><a href="/tags/"><div class="headline">标签</div><div class="length-num">3</div></a><a href="/categories/"><div class="headline">分类</div><div class="length-num">1</div></a></div><div class="menus_items"><div class="menus_item"><a class="site-page" href="/"><i class="fa-fw fas fa-home"></i><span> 首页</span></a></div><div class="menus_item"><a class="site-page" href="/shuoshuo/"><i class="fa-fw fas fa-heart"></i><span> 说说</span></a></div><div class="menus_item"><a class="site-page" href="/archives/"><i class="fa-fw fas fa-archive"></i><span> 时间轴</span></a></div><div class="menus_item"><a class="site-page" href="/tags/"><i class="fa-fw fas fa-tags"></i><span> 标签</span></a></div><div class="menus_item"><a class="site-page" href="/categories/"><i class="fa-fw fas fa-folder-open"></i><span> 分类</span></a></div></div></div></div><div class="post" id="body-wrap"><header class="not-top-img" id="page-header"><nav id="nav"><span id="blog-info"><a class="nav-site-title" href="/"><span class="site-name">长夜漫漫</span></a><a class="nav-page-title" href="/"><span class="site-name">C++中const的各种用法</span></a></span><div id="menus"><div class="menus_items"><div class="menus_item"><a class="site-page" href="/"><i class="fa-fw fas fa-home"></i><span> 首页</span></a></div><div class="menus_item"><a class="site-page" href="/shuoshuo/"><i class="fa-fw fas fa-heart"></i><span> 说说</span></a></div><div class="menus_item"><a class="site-page" href="/archives/"><i class="fa-fw fas fa-archive"></i><span> 时间轴</span></a></div><div class="menus_item"><a class="site-page" href="/tags/"><i class="fa-fw fas fa-tags"></i><span> 标签</span></a></div><div class="menus_item"><a class="site-page" href="/categories/"><i class="fa-fw fas fa-folder-open"></i><span> 分类</span></a></div></div><div id="toggle-menu"><span class="site-page"><i class="fas fa-bars fa-fw"></i></span></div></div></nav></header><main class="layout" id="content-inner"><div id="post"><div id="post-info"><h1 class="post-title">C++中const的各种用法</h1><div id="post-meta"><div class="meta-firstline"><span class="post-meta-date"><i class="far fa-calendar-alt fa-fw post-meta-icon"></i><span class="post-meta-label">发表于</span><time class="post-meta-date-created" datetime="2024-11-17T15:39:50.000Z" title="发表于 2024-11-17 23:39:50">2024-11-17</time><span class="post-meta-separator">|</span><i class="fas fa-history fa-fw post-meta-icon"></i><span class="post-meta-label">更新于</span><time class="post-meta-date-updated" datetime="2024-11-17T15:41:04.943Z" title="更新于 2024-11-17 23:41:04">2024-11-17</time></span><span class="post-meta-categories"><span class="post-meta-separator">|</span><i class="fas fa-inbox fa-fw post-meta-icon"></i><a class="post-meta-categories" href="/categories/%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0/">学习笔记</a></span></div><div class="meta-secondline"><span class="post-meta-separator">|</span><span class="post-meta-pv-cv" id="" data-flag-title=""><i class="far fa-eye fa-fw post-meta-icon"></i><span class="post-meta-label">浏览量:</span><span id="busuanzi_value_page_pv"><i class="fa-solid fa-spinner fa-spin"></i></span></span></div></div></div><article class="container post-content" id="article-container"><p>在 C++ 中，<code>const</code> 关键字用于声明常量，指示某个变量的值不能被改变。它是 C++ 中的重要语法工具，广泛应用于不同的编程场景中，能够提高代码的可维护性、可读性和安全性。以下是 <code>const</code> 的全部使用场景及详解：</p>
+<h3 id="1-常量变量（Constant-Variables）"><a href="#1-常量变量（Constant-Variables）" class="headerlink" title="1. 常量变量（Constant Variables）"></a>1. <strong>常量变量</strong>（Constant Variables）</h3><p>最常见的 <code>const</code> 用法是声明常量变量，它确保变量在初始化之后不能修改其值。</p>
+<figure class="highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="type">const</span> <span class="type">int</span> MAX_SIZE = <span class="number">100</span>;</span><br></pre></td></tr></table></figure>
+<p>在此例中，<code>MAX_SIZE</code> 在程序中被视为常量，编译器会阻止你尝试修改它。</p>
+<ul>
+<li><strong>注意：</strong> 常量变量的初始化必须在声明时进行，并且之后不可修改。</li>
+</ul>
+<h3 id="2-指针与常量指针"><a href="#2-指针与常量指针" class="headerlink" title="2. 指针与常量指针"></a>2. <strong>指针与常量指针</strong></h3><p><code>const</code> 可以与指针一起使用，分别定义常量指针、常量指向的对象，以及两者的组合。</p>
+<h4 id="2-1-常量指针（Pointer-to-const）"><a href="#2-1-常量指针（Pointer-to-const）" class="headerlink" title="2.1 常量指针（Pointer to const）"></a>2.1 常量指针（Pointer to const）</h4><figure class="highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="type">const</span> <span class="type">int</span>* ptr;</span><br></pre></td></tr></table></figure>
+<ul>
+<li>这里 <code>ptr</code> 是一个指向 <code>const int</code> 的指针，意味着通过 <code>ptr</code> 不能修改 <code>*ptr</code> 的值，但 <code>ptr</code> 本身是可以指向不同的地址的。</li>
+</ul>
+<figure class="highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="type">int</span> a = <span class="number">10</span>, b = <span class="number">20</span>;</span><br><span class="line"><span class="type">const</span> <span class="type">int</span>* ptr = &amp;a;  <span class="comment">// 合法</span></span><br><span class="line">*ptr = <span class="number">30</span>;  <span class="comment">// 错误: 无法修改 *ptr</span></span><br><span class="line">ptr = &amp;b;  <span class="comment">// 合法</span></span><br></pre></td></tr></table></figure>
+
+<h4 id="2-2-常量指针（Const-pointer）"><a href="#2-2-常量指针（Const-pointer）" class="headerlink" title="2.2 常量指针（Const pointer）"></a>2.2 常量指针（Const pointer）</h4><figure class="highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="type">int</span>* <span class="type">const</span> ptr = &amp;a;</span><br></pre></td></tr></table></figure>
+<ul>
+<li>这里 <code>ptr</code> 是一个常量指针，意味着指针本身不可更改，但可以通过指针修改其指向的值。</li>
+</ul>
+<figure class="highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="type">int</span> a = <span class="number">10</span>;</span><br><span class="line"><span class="type">int</span>* <span class="type">const</span> ptr = &amp;a;</span><br><span class="line">*ptr = <span class="number">20</span>;  <span class="comment">// 合法</span></span><br><span class="line">ptr = &amp;b;  <span class="comment">// 错误: 无法修改 ptr</span></span><br></pre></td></tr></table></figure>
+
+<h4 id="2-3-常量指针指向常量（Const-pointer-to-const）"><a href="#2-3-常量指针指向常量（Const-pointer-to-const）" class="headerlink" title="2.3 常量指针指向常量（Const pointer to const）"></a>2.3 常量指针指向常量（Const pointer to const）</h4><figure class="highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="type">const</span> <span class="type">int</span>* <span class="type">const</span> ptr = &amp;a;</span><br></pre></td></tr></table></figure>
+<ul>
+<li>这里 <code>ptr</code> 既是常量指针，又指向常量，意味着指针不可更改，也不能通过指针修改它所指向的值。</li>
+</ul>
+<figure class="highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="type">int</span> a = <span class="number">10</span>;</span><br><span class="line"><span class="type">const</span> <span class="type">int</span>* <span class="type">const</span> ptr = &amp;a;</span><br><span class="line">*ptr = <span class="number">20</span>;  <span class="comment">// 错误: 无法修改 *ptr</span></span><br><span class="line">ptr = &amp;b;  <span class="comment">// 错误: 无法修改 ptr</span></span><br></pre></td></tr></table></figure>
+
+<h3 id="3-常量成员函数（Const-Member-Functions）"><a href="#3-常量成员函数（Const-Member-Functions）" class="headerlink" title="3. 常量成员函数（Const Member Functions）"></a>3. <strong>常量成员函数</strong>（Const Member Functions）</h3><p>常量成员函数是不能修改对象状态的成员函数。它通过在成员函数声明的末尾添加 <code>const</code> 关键字来实现。</p>
+<figure class="highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">class</span> <span class="title class_">MyClass</span> &#123;</span><br><span class="line"><span class="keyword">public</span>:</span><br><span class="line">    <span class="type">int</span> x;</span><br><span class="line">    <span class="built_in">MyClass</span>(<span class="type">int</span> val) : <span class="built_in">x</span>(val) &#123;&#125;</span><br><span class="line"></span><br><span class="line">    <span class="function"><span class="type">void</span> <span class="title">print</span><span class="params">()</span> <span class="type">const</span> </span>&#123;  <span class="comment">// 该函数不能修改任何成员变量</span></span><br><span class="line">        std::cout &lt;&lt; x &lt;&lt; std::endl;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="function"><span class="type">void</span> <span class="title">setX</span><span class="params">(<span class="type">int</span> val)</span> </span>&#123;  <span class="comment">// 该函数可以修改成员变量</span></span><br><span class="line">        x = val;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;;</span><br></pre></td></tr></table></figure>
+
+<ul>
+<li><strong>注意：</strong> 常量成员函数可以访问其他常量成员函数和常量数据成员，但不能修改类中的成员变量。</li>
+</ul>
+<h3 id="4-常量引用（Constant-Reference）"><a href="#4-常量引用（Constant-Reference）" class="headerlink" title="4. 常量引用（Constant Reference）"></a>4. <strong>常量引用</strong>（Constant Reference）</h3><p>常量引用是指引用一个常量对象，使得引用在生命周期内不能修改其所引用的对象的值。常量引用避免了对象的拷贝，并且可以确保在传递对象时不会意外改变对象内容。</p>
+<figure class="highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="type">void</span> <span class="title">print</span><span class="params">(<span class="type">const</span> <span class="type">int</span>&amp; x)</span> </span>&#123;</span><br><span class="line">    std::cout &lt;&lt; x &lt;&lt; std::endl;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<ul>
+<li><strong>常量引用常用于</strong>：传递大型对象时避免拷贝，并且通过引用传递保证不修改数据（例如，<code>const std::string&amp;</code>）。</li>
+</ul>
+<h3 id="5-常量数组（Constant-Arrays）"><a href="#5-常量数组（Constant-Arrays）" class="headerlink" title="5. 常量数组（Constant Arrays）"></a>5. <strong>常量数组</strong>（Constant Arrays）</h3><p><code>const</code> 可用于声明常量数组，确保数组的元素不能被修改。</p>
+<figure class="highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="type">const</span> <span class="type">int</span> arr[] = &#123;<span class="number">1</span>, <span class="number">2</span>, <span class="number">3</span>&#125;;</span><br></pre></td></tr></table></figure>
+<ul>
+<li>这种声明方式保证了数组中的元素是不可修改的，且整个数组在声明时初始化后就不能更改。</li>
+</ul>
+<h3 id="6-常量表达式（Constant-Expressions）"><a href="#6-常量表达式（Constant-Expressions）" class="headerlink" title="6. 常量表达式（Constant Expressions）"></a>6. <strong>常量表达式</strong>（Constant Expressions）</h3><p>C++11 引入了 <code>constexpr</code> 关键字，标识一个变量或函数可以在编译时求值。<code>constexpr</code> 常常用于声明常量表达式（与 <code>const</code> 有些相似，但功能有所不同）。</p>
+<figure class="highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">constexpr</span> <span class="type">int</span> <span class="title">square</span><span class="params">(<span class="type">int</span> x)</span> </span>&#123;</span><br><span class="line">    <span class="keyword">return</span> x * x;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<ul>
+<li><code>constexpr</code> 函数或变量的值必须是编译时常量，通常在编译时计算，因此比 <code>const</code> 更具约束性。</li>
+</ul>
+<h3 id="7-常量模板参数（Constant-Template-Parameters）"><a href="#7-常量模板参数（Constant-Template-Parameters）" class="headerlink" title="7. 常量模板参数（Constant Template Parameters）"></a>7. <strong>常量模板参数</strong>（Constant Template Parameters）</h3><p><code>const</code> 还可以与模板参数一起使用，尤其是与编译时常量参数一起使用时，它允许在模板中使用常量值。</p>
+<figure class="highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">template</span> &lt;<span class="type">int</span> N&gt;</span><br><span class="line"><span class="keyword">class</span> <span class="title class_">MyClass</span> &#123;</span><br><span class="line"><span class="keyword">public</span>:</span><br><span class="line">    <span class="function"><span class="type">void</span> <span class="title">print</span><span class="params">()</span> <span class="type">const</span> </span>&#123;</span><br><span class="line">        std::cout &lt;&lt; N &lt;&lt; std::endl;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;;</span><br></pre></td></tr></table></figure>
+<p>在这种情况下，<code>N</code> 是一个常量模板参数，它在编译时就确定。</p>
+<h3 id="8-const-与-volatile-配合使用"><a href="#8-const-与-volatile-配合使用" class="headerlink" title="8. const 与 volatile 配合使用"></a>8. <strong><code>const</code> 与 <code>volatile</code> 配合使用</strong></h3><p><code>const</code> 可以与 <code>volatile</code> 关键字结合使用，这意味着变量的值可能在程序外部（例如硬件寄存器）发生变化，但是通过程序内部不能修改它。</p>
+<figure class="highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="type">const</span> <span class="keyword">volatile</span> <span class="type">int</span>* ptr;</span><br></pre></td></tr></table></figure>
+<ul>
+<li>在这种情况下，编译器会保证你不能修改该指针指向的值（<code>const</code>），但也会允许访问该值，并且会告诉编译器该值可能被外部因素修改（<code>volatile</code>）。</li>
+</ul>
+<h3 id="9-常量参数（Constant-Parameters）"><a href="#9-常量参数（Constant-Parameters）" class="headerlink" title="9. 常量参数（Constant Parameters）"></a>9. <strong>常量参数</strong>（Constant Parameters）</h3><p>通过将函数参数声明为常量，可以避免不小心修改传入的参数，同时可以优化性能，尤其是在传递大型对象时。</p>
+<figure class="highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="type">void</span> <span class="title">func</span><span class="params">(<span class="type">const</span> MyClass&amp; obj)</span> </span>&#123;</span><br><span class="line">    <span class="comment">// obj不能被修改</span></span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<ul>
+<li>如果函数的参数是大型对象（例如对象或数组），传递常量引用比传递常量副本更高效。</li>
+</ul>
+<h3 id="10-const-与类的对象（Const-Objects）"><a href="#10-const-与类的对象（Const-Objects）" class="headerlink" title="10. const 与类的对象（Const Objects）"></a>10. <strong><code>const</code> 与类的对象</strong>（Const Objects）</h3><p>声明一个 <code>const</code> 类型的对象意味着对象一旦初始化后，其成员函数只能调用常量成员函数。</p>
+<figure class="highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="type">const</span> MyClass <span class="title">obj</span><span class="params">(<span class="number">10</span>)</span></span>;</span><br><span class="line">obj.<span class="built_in">setX</span>(<span class="number">20</span>);  <span class="comment">// 错误: const 对象不能调用非 const 成员函数</span></span><br></pre></td></tr></table></figure>
+
+<h3 id="11-const-与类型别名（typedef-或-using）"><a href="#11-const-与类型别名（typedef-或-using）" class="headerlink" title="11. const 与类型别名（typedef 或 using）"></a>11. <strong><code>const</code> 与类型别名（<code>typedef</code> 或 <code>using</code>）</strong></h3><p><code>const</code> 可以与类型别名结合使用，创建一个常量类型。</p>
+<figure class="highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">typedef</span> <span class="type">const</span> <span class="type">int</span> IntConst;</span><br><span class="line">IntConst x = <span class="number">10</span>;  <span class="comment">// x 不能修改</span></span><br></pre></td></tr></table></figure>
+
+<p>同样，可以使用 <code>using</code> 来创建常量别名：</p>
+<figure class="highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">using</span> IntConst = <span class="type">const</span> <span class="type">int</span>;</span><br><span class="line">IntConst x = <span class="number">10</span>;</span><br></pre></td></tr></table></figure>
+
+<h3 id="总结"><a href="#总结" class="headerlink" title="总结"></a>总结</h3><p><code>const</code> 是 C++ 中一个非常重要的关键字，它不仅用于声明常量，还能增强代码的安全性、可读性、以及避免意外的修改。通过合理使用 <code>const</code>，可以提高代码的性能和可维护性，减少错误发生的几率。</p>
+<p>常见使用场景：</p>
+<ul>
+<li>常量变量</li>
+<li>常量指针与常量引用</li>
+<li>常量成员函数</li>
+<li>常量表达式（<code>constexpr</code>）</li>
+<li>模板参数中的常量</li>
+<li>常量数组与类型别名</li>
+</ul>
+<p>通过在合适的场景中使用 <code>const</code>，可以有效地避免不必要的副作用，提升代码质量。</p>
+</article><div class="post-copyright"><div class="post-copyright__author"><span class="post-copyright-meta"><i class="fas fa-circle-user fa-fw"></i>文章作者: </span><span class="post-copyright-info"><a href="http://qbndp.github.io">长夜</a></span></div><div class="post-copyright__type"><span class="post-copyright-meta"><i class="fas fa-square-arrow-up-right fa-fw"></i>文章链接: </span><span class="post-copyright-info"><a href="http://qbndp.github.io/2024/11/17/C++%E4%B8%ADconst%E7%9A%84%E5%90%84%E7%A7%8D%E7%94%A8%E6%B3%95/">http://qbndp.github.io/2024/11/17/C++中const的各种用法/</a></span></div><div class="post-copyright__notice"><span class="post-copyright-meta"><i class="fas fa-circle-exclamation fa-fw"></i>版权声明: </span><span class="post-copyright-info">本博客所有文章除特别声明外，均采用 <a href="https://creativecommons.org/licenses/by-nc-sa/4.0/" target="_blank">CC BY-NC-SA 4.0</a> 许可协议。转载请注明来源 <a href="http://qbndp.github.io" target="_blank">长夜漫漫</a>！</span></div></div><div class="tag_share"><div class="post-meta__tag-list"><a class="post-meta__tags" href="/tags/C/">C++</a></div></div><nav class="pagination-post" id="pagination"><a class="pagination-related full-width" href="/2024/11/17/%E6%88%91%E7%9A%84%E7%AC%AC%E4%B8%80%E7%AF%87%E6%96%87%E7%AB%A0/" title="学习编程的五个重要注意点"><div class="cover" style="background: var(--default-bg-color)"></div><div class="info text-right"><div class="info-1"><div class="info-item-1">下一篇</div><div class="info-item-2">学习编程的五个重要注意点</div></div><div class="info-2"><div class="info-item-1">日拱一卒，功不唐捐。</div></div></div></a></nav></div><div class="aside-content" id="aside-content"><div class="card-widget card-info text-center"><div class="avatar-img"><img src="/img/butterfly-icon.png" onerror="this.onerror=null;this.src='/img/friend_404.gif'" alt="avatar"/></div><div class="author-info-name">长夜</div><div class="author-info-description"></div><div class="site-data"><a href="/archives/"><div class="headline">文章</div><div class="length-num">2</div></a><a href="/tags/"><div class="headline">标签</div><div class="length-num">3</div></a><a href="/categories/"><div class="headline">分类</div><div class="length-num">1</div></a></div><a id="card-info-btn" target="_blank" rel="noopener" href="https://github.com/qbndp"><i class="fab fa-github"></i><span>Follow Me</span></a></div><div class="card-widget card-announcement"><div class="item-headline"><i class="fas fa-bullhorn fa-shake"></i><span>公告</span></div><div class="announcement_content">欢迎前端高手到访！！！</div></div><div class="sticky_layout"><div class="card-widget" id="card-toc"><div class="item-headline"><i class="fas fa-stream"></i><span>目录</span><span class="toc-percentage"></span></div><div class="toc-content"><ol class="toc"><li class="toc-item toc-level-3"><a class="toc-link" href="#1-%E5%B8%B8%E9%87%8F%E5%8F%98%E9%87%8F%EF%BC%88Constant-Variables%EF%BC%89"><span class="toc-number">1.</span> <span class="toc-text">1. 常量变量（Constant Variables）</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#2-%E6%8C%87%E9%92%88%E4%B8%8E%E5%B8%B8%E9%87%8F%E6%8C%87%E9%92%88"><span class="toc-number">2.</span> <span class="toc-text">2. 指针与常量指针</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#2-1-%E5%B8%B8%E9%87%8F%E6%8C%87%E9%92%88%EF%BC%88Pointer-to-const%EF%BC%89"><span class="toc-number">2.1.</span> <span class="toc-text">2.1 常量指针（Pointer to const）</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#2-2-%E5%B8%B8%E9%87%8F%E6%8C%87%E9%92%88%EF%BC%88Const-pointer%EF%BC%89"><span class="toc-number">2.2.</span> <span class="toc-text">2.2 常量指针（Const pointer）</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#2-3-%E5%B8%B8%E9%87%8F%E6%8C%87%E9%92%88%E6%8C%87%E5%90%91%E5%B8%B8%E9%87%8F%EF%BC%88Const-pointer-to-const%EF%BC%89"><span class="toc-number">2.3.</span> <span class="toc-text">2.3 常量指针指向常量（Const pointer to const）</span></a></li></ol></li><li class="toc-item toc-level-3"><a class="toc-link" href="#3-%E5%B8%B8%E9%87%8F%E6%88%90%E5%91%98%E5%87%BD%E6%95%B0%EF%BC%88Const-Member-Functions%EF%BC%89"><span class="toc-number">3.</span> <span class="toc-text">3. 常量成员函数（Const Member Functions）</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#4-%E5%B8%B8%E9%87%8F%E5%BC%95%E7%94%A8%EF%BC%88Constant-Reference%EF%BC%89"><span class="toc-number">4.</span> <span class="toc-text">4. 常量引用（Constant Reference）</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#5-%E5%B8%B8%E9%87%8F%E6%95%B0%E7%BB%84%EF%BC%88Constant-Arrays%EF%BC%89"><span class="toc-number">5.</span> <span class="toc-text">5. 常量数组（Constant Arrays）</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#6-%E5%B8%B8%E9%87%8F%E8%A1%A8%E8%BE%BE%E5%BC%8F%EF%BC%88Constant-Expressions%EF%BC%89"><span class="toc-number">6.</span> <span class="toc-text">6. 常量表达式（Constant Expressions）</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#7-%E5%B8%B8%E9%87%8F%E6%A8%A1%E6%9D%BF%E5%8F%82%E6%95%B0%EF%BC%88Constant-Template-Parameters%EF%BC%89"><span class="toc-number">7.</span> <span class="toc-text">7. 常量模板参数（Constant Template Parameters）</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#8-const-%E4%B8%8E-volatile-%E9%85%8D%E5%90%88%E4%BD%BF%E7%94%A8"><span class="toc-number">8.</span> <span class="toc-text">8. const 与 volatile 配合使用</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#9-%E5%B8%B8%E9%87%8F%E5%8F%82%E6%95%B0%EF%BC%88Constant-Parameters%EF%BC%89"><span class="toc-number">9.</span> <span class="toc-text">9. 常量参数（Constant Parameters）</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#10-const-%E4%B8%8E%E7%B1%BB%E7%9A%84%E5%AF%B9%E8%B1%A1%EF%BC%88Const-Objects%EF%BC%89"><span class="toc-number">10.</span> <span class="toc-text">10. const 与类的对象（Const Objects）</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#11-const-%E4%B8%8E%E7%B1%BB%E5%9E%8B%E5%88%AB%E5%90%8D%EF%BC%88typedef-%E6%88%96-using%EF%BC%89"><span class="toc-number">11.</span> <span class="toc-text">11. const 与类型别名（typedef 或 using）</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E6%80%BB%E7%BB%93"><span class="toc-number">12.</span> <span class="toc-text">总结</span></a></li></ol></div></div><div class="card-widget card-recent-post"><div class="item-headline"><i class="fas fa-history"></i><span>最新文章</span></div><div class="aside-list"><div class="aside-list-item no-cover"><div class="content"><a class="title" href="/2024/11/17/C++%E4%B8%ADconst%E7%9A%84%E5%90%84%E7%A7%8D%E7%94%A8%E6%B3%95/" title="C++中const的各种用法">C++中const的各种用法</a><time datetime="2024-11-17T15:39:50.000Z" title="发表于 2024-11-17 23:39:50">2024-11-17</time></div></div><div class="aside-list-item no-cover"><div class="content"><a class="title" href="/2024/11/17/%E6%88%91%E7%9A%84%E7%AC%AC%E4%B8%80%E7%AF%87%E6%96%87%E7%AB%A0/" title="学习编程的五个重要注意点">学习编程的五个重要注意点</a><time datetime="2024-11-17T10:07:14.000Z" title="发表于 2024-11-17 18:07:14">2024-11-17</time></div></div></div></div></div></div></main><footer id="footer"><div id="footer-wrap"><div class="copyright">&copy;2019 - 2024 By 长夜</div><div class="framework-info"><span>框架 </span><a target="_blank" rel="noopener" href="https://hexo.io">Hexo</a><span class="footer-separator">|</span><span>主题 </span><a target="_blank" rel="noopener" href="https://github.com/jerryc127/hexo-theme-butterfly">Butterfly</a></div></div></footer></div><div id="rightside"><div id="rightside-config-hide"><button id="readmode" type="button" title="阅读模式"><i class="fas fa-book-open"></i></button><button id="darkmode" type="button" title="日间和夜间模式切换"><i class="fas fa-adjust"></i></button><button id="hide-aside-btn" type="button" title="单栏和双栏切换"><i class="fas fa-arrows-alt-h"></i></button></div><div id="rightside-config-show"><button id="rightside-config" type="button" title="设置"><i class="fas fa-cog fa-spin"></i></button><button class="close" id="mobile-toc-button" type="button" title="目录"><i class="fas fa-list-ul"></i></button><button id="go-up" type="button" title="回到顶部"><span class="scroll-percent"></span><i class="fas fa-arrow-up"></i></button></div></div><div><script src="/js/utils.js"></script><script src="/js/main.js"></script><div class="js-pjax"></div><script async data-pjax src="//busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js"></script></div></body></html>
